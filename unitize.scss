@@ -1,0 +1,56 @@
+
+@function strip-unit($number) {
+    @if type_of($number) == 'number' and not unitless($number) {
+        @return $number / ($number * 0 + 1);
+    }
+}
+
+@mixin unitize($property, $value) {
+    #{$property}: #{$value}px;
+    #{$property}: #{$value / strip-unit($font-size-base)}rem;
+}
+
+@mixin unitize-margin($top, $right, $bottom: $top, $left: $right) {
+    margin: #{$top}px #{$right}px #{$bottom} #{$left};
+    margin: #{$top / strip-unit($font-size-base)}rem #{$right / strip-unit($font-size-base)}rem #{$bottom / strip-unit($font-size-base)}rem #{$left / strip-unit($font-size-base)}rem;
+}
+
+@mixin unitize-padding($top, $right, $bottom: $top, $left: $right) {
+    padding: #{$top}px #{$right}px #{$bottom} #{$left};
+    padding: #{$top / strip-unit($font-size-base)}rem #{$right / strip-unit($font-size-base)}rem #{$bottom / strip-unit($font-size-base)}rem #{$left / strip-unit($font-size-base)}rem;
+}
+
+@mixin unitize-width($value) {
+    width: #{$value}px;
+    width: #{$value / strip-unit($font-size-base)}rem;
+}
+
+@mixin unitize-height($value) {
+    height: #{$value}px;
+    height: #{$value / strip-unit($font-size-base)}rem;
+}
+
+@mixin unitize-max-width($value) {
+    max-width: #{$value}px;
+    max-width: #{$value / strip-unit($font-size-base)}rem;
+}
+
+@mixin unitize-max-height($value) {
+    max-height: #{$value}px;
+    max-height: #{$value / strip-unit($font-size-base)}rem;
+}
+
+@mixin unitize-min-width($value) {
+    max-width: #{$value}px;
+    max-width: #{$value / strip-unit($font-size-base)}rem;
+}
+
+@mixin unitize-min-height($value) {
+    min-height: #{$value}px;
+    min-height: #{$value / strip-unit($font-size-base)}rem;
+}
+
+@mixin unitize-border($value, $type: solid, $color: #333) {
+    border: #{$value}px $type $color;
+    border: #{$value / strip-unit($font-size-base)}rem $type $color;
+}
