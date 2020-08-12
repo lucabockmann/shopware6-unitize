@@ -1,56 +1,77 @@
-
 @function strip-unit($number) {
     @if type_of($number) == 'number' and not unitless($number) {
         @return $number / ($number * 0 + 1);
     }
 }
 
-@mixin unitize($property, $value) {
+@mixin unitize($property, $value, $baseValue: $font-size-base) {
+    $emCalcValue: #{$value / strip-unit($baseValue)}rem;
+
     #{$property}: #{$value}px;
-    #{$property}: #{$value / strip-unit($font-size-base)}rem;
+    #{$property}: $emCalcValue;
 }
 
-@mixin unitize-margin($top, $right, $bottom: $top, $left: $right) {
-    margin: #{$top}px #{$right}px #{$bottom} #{$left};
-    margin: #{$top / strip-unit($font-size-base)}rem #{$right / strip-unit($font-size-base)}rem #{$bottom / strip-unit($font-size-base)}rem #{$left / strip-unit($font-size-base)}rem;
+@mixin unitize-margin($top, $right, $bottom: $top, $left: $right, $baseValue: $font-size-base) {
+    $marginPx: #{$top}px #{$right}px #{$bottom}px #{$left}px;
+    $marginEmCalc: #{$top / strip-unit($baseValue)}rem #{$right / strip-unit($baseValue)}rem #{$bottom / strip-unit($baseValue)}rem #{$left / strip-unit($baseValue)}rem;
+
+    margin: $marginPx;
+    margin: $marginEmCalc;
 }
 
-@mixin unitize-padding($top, $right, $bottom: $top, $left: $right) {
-    padding: #{$top}px #{$right}px #{$bottom} #{$left};
-    padding: #{$top / strip-unit($font-size-base)}rem #{$right / strip-unit($font-size-base)}rem #{$bottom / strip-unit($font-size-base)}rem #{$left / strip-unit($font-size-base)}rem;
+@mixin unitize-padding($top, $right, $bottom: $top, $left: $right, $baseValue: $font-size-base) {
+    $paddingPx: #{$top}px #{$right}px #{$bottom}px #{$left}px;
+    $paddingEmCalc: #{$top / strip-unit($baseValue)}rem #{$right / strip-unit($baseValue)}rem #{$bottom / strip-unit($baseValue)}rem #{$left / strip-unit($baseValue)}rem;
+
+    padding: $paddingPx;
+    padding: $paddingEmCalc;
 }
 
-@mixin unitize-width($value) {
+@mixin unitize-width($value, $baseValue: $font-size-base) {
+    $emCalcValue: #{$value / strip-unit($baseValue)}rem;
+
     width: #{$value}px;
-    width: #{$value / strip-unit($font-size-base)}rem;
+    width: $emCalcValue;
 }
 
-@mixin unitize-height($value) {
+@mixin unitize-height($value, $baseValue: $font-size-base) {
+    $emCalcValue: #{$value / strip-unit($baseValue)}rem;
+
     height: #{$value}px;
-    height: #{$value / strip-unit($font-size-base)}rem;
+    height: $emCalcValue;
 }
 
-@mixin unitize-max-width($value) {
+@mixin unitize-max-width($value, $baseValue: $font-size-base) {
+    $emCalcValue: #{$value / strip-unit($baseValue)}rem;
+
     max-width: #{$value}px;
-    max-width: #{$value / strip-unit($font-size-base)}rem;
+    max-width: $emCalcValue;
 }
 
-@mixin unitize-max-height($value) {
+@mixin unitize-max-height($value, $baseValue: $font-size-base) {
+    $emCalcValue: #{$value / strip-unit($baseValue)}rem;
+
     max-height: #{$value}px;
-    max-height: #{$value / strip-unit($font-size-base)}rem;
+    max-height: $emCalcValue;
 }
 
-@mixin unitize-min-width($value) {
+@mixin unitize-min-width($value, $baseValue: $font-size-base) {
+    $emCalcValue: #{$value / strip-unit($baseValue)}rem;
+
     max-width: #{$value}px;
-    max-width: #{$value / strip-unit($font-size-base)}rem;
+    max-width: $emCalcValue;
 }
 
-@mixin unitize-min-height($value) {
+@mixin unitize-min-height($value, $baseValue: $font-size-base) {
+    $emCalcValue: #{$value / strip-unit($baseValue)}rem;
+
     min-height: #{$value}px;
-    min-height: #{$value / strip-unit($font-size-base)}rem;
+    min-height: $emCalcValue;
 }
 
-@mixin unitize-border($value, $type: solid, $color: #333) {
+@mixin unitize-border($value, $type: solid, $color: #333, $baseValue: $font-size-base) {
+    $emCalcValue: #{$value / strip-unit($baseValue)}rem;
+
     border: #{$value}px $type $color;
-    border: #{$value / strip-unit($font-size-base)}rem $type $color;
+    border: $emCalcValue $type $color;
 }
